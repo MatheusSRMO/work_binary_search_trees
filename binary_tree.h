@@ -36,7 +36,7 @@ KeyValPair *key_val_pair_construct(void *key, void *val);
 /// @brief  Destroi um par chave-valor
 /// @param kvp  Par chave-valor
 /// @return void
-void key_val_pair_destroy(KeyValPair *kvp);
+void key_val_pair_destroy(KeyValPair *kvp, KeyDestroyFn key_destroy_fn, ValDestroyFn val_destroy_fn);
 
 /// @brief Cria um no
 /// @param key Chave
@@ -49,7 +49,7 @@ Node *node_construct(void *key, void *value, Node *left, Node *right);
 /// @brief  Destroi um no
 /// @param node No
 /// @return void
-void node_destroy(Node *node);
+void node_destroy(Node *node, KeyDestroyFn key_destroy_fn, ValDestroyFn val_destroy_fn);
 
 /// @brief Cria uma arvore binaria
 /// @param cmp_fn Funcao de comparacao

@@ -1,6 +1,6 @@
 #include "person.h"
 
-Person *person_construct(char *name, int age, int height) {
+Person *person_construct(char *name, int age, float height) {
     Person *person = malloc(sizeof(Person));
     person->name = malloc(strlen(name) + 1);
     strcpy(person->name, name);
@@ -10,10 +10,11 @@ Person *person_construct(char *name, int age, int height) {
 }
 
 void person_print(Person *person) {
-    printf("%s %d %d\n", person->name, person->age, person->height);
+    printf("%s %d %.2f\n", person->name, person->age, person->height);
 }
 
-void person_destroy(Person *person) {
-    free(person->name);
-    free(person);
+void person_destroy(void *person) {
+    Person *person_ = (Person *)person;
+    free(person_->name);
+    free(person_);
 }

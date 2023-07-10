@@ -3,17 +3,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct {
     char *name;
     int age;
-    int height;
+    float height;
 } Person;
 
-Person *person_construct(char *name, int age, int height);
+Person *person_construct(char *name, int age, float height);
 
 void person_print(Person *person);
 
-void person_destroy(Person *person);
+void person_destroy(void* person);
 
 #endif // _PERSON_H_
