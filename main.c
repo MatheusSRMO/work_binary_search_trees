@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "binary_tree.h"
-#include "vector.h"
+#include "ed/binary_tree.h"
+#include "ed/vector.h"
 #include "person.h"
 
 
