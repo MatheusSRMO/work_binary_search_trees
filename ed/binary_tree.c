@@ -274,3 +274,31 @@ Vector *binary_tree_inorder_traversal(BinaryTree *bt) {
 
     return out_vec;
 }
+
+Vector *binary_tree_preorder_traversal(BinaryTree *bt) {
+    Vector* out_vec = vector_construct();
+
+    // Cria uma pilha
+    Stack* stack = stack_construct();
+
+    // Adicione o nó raiz na pilha
+    stack_push(stack, bt->root);
+
+    // Enquanto a pilha não estiver vazia:
+    while(!stack_empty(stack)) {
+        // Retire um item da pilha
+        Node* popped = stack_pop(stack);
+        // Adicione o item na saída
+        vector_push_back(out_vec, popped);
+
+        if(popped->right != NULL) {
+            stack_push(stack, popped->right);
+        }
+        if(popped->left != NULL) {
+            stack_push(stack, popped->left);
+        }
+    }
+    stack_destroy(stack);
+
+    return out_vec;
+}
