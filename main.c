@@ -74,15 +74,27 @@ int main(void) {
         }
 
         else if (!strcmp(cmd, "POP_MIN")) {
-            KeyValPair key_val_par_popped_min = binary_tree_pop_min(bt);
-            Person* person_min = key_val_par_popped_min.value;
-            person_print(person_min);
+            KeyValPair* key_val_par_popped_min = binary_tree_pop_min(bt);
+            if(key_val_par_popped_min != NULL) {
+                Person* person_min = key_val_par_popped_min->value;
+                person_print(person_min);
+                key_val_pair_destroy(key_val_par_popped_min, name_destroy, person_destroy);
+            }
+            else {
+                printf("ARVORE VAZIA\n");
+            }
         }
 
         else if (!strcmp(cmd, "POP_MAX")) {
-            KeyValPair key_val_par_popped_max = binary_tree_pop_max(bt);
-            Person* person_max = key_val_par_popped_max.value;
-            person_print(person_max);
+            KeyValPair* key_val_par_popped_max = binary_tree_pop_max(bt);
+            if(key_val_par_popped_max != NULL) {
+                Person* person_max = key_val_par_popped_max->value;
+                person_print(person_max);
+                key_val_pair_destroy(key_val_par_popped_max, name_destroy, person_destroy);
+            }
+            else {
+                printf("ARVORE VAZIA\n");
+            }
         }
     }
 

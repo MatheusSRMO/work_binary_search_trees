@@ -168,39 +168,50 @@ KeyValPair binary_tree_max(BinaryTree *bt) {
     return *current->key_val_pair;
 }
 
-KeyValPair binary_tree_pop_min(BinaryTree *bt) {
+KeyValPair* binary_tree_pop_min(BinaryTree *bt) {
+    if(bt->root == NULL) {
+        return NULL;
+    }
     Node *current = bt->root;
     Node *parent = NULL;
     while (current->left != NULL) {
         parent = current;
         current = current->left;
     }
-    KeyValPair kvp = *current->key_val_pair;
+    KeyValPair* kvp = current->key_val_pair;
     if (parent == NULL) {
         bt->root = current->right;
     }
     else {
         parent->left = current->right;
     }
-    node_destroy(current, bt->key_destroy_fn, bt->val_destroy_fn);
+
+    free(current);
+    
     return kvp;
 }
 
-KeyValPair binary_tree_pop_max(BinaryTree *bt) {
+KeyValPair* binary_tree_pop_max(BinaryTree *bt) {
+    if(bt->root == NULL) {
+        return NULL;
+    }
     Node *current = bt->root;
     Node *parent = NULL;
     while (current->right != NULL) {
         parent = current;
         current = current->right;
     }
-    KeyValPair kvp = *current->key_val_pair;
+    
+    KeyValPair* kvp = current->key_val_pair;
     if (parent == NULL) {
         bt->root = current->left;
     }
     else {
         parent->right = current->left;
     }
-    node_destroy(current, bt->key_destroy_fn, bt->val_destroy_fn);
+
+    free(current);
+
     return kvp;
 }
 
