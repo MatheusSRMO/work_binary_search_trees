@@ -90,9 +90,11 @@ void binary_tree_remove(BinaryTree *bt, void *key) {
             current = current->right;
         }
     }
+    // não encontrou
     if (current == NULL) {
         return;
     }
+    // Caso 1: Se z não tem nenhum filho, então simplesmente o removemos modificando seu pai de modo a substituir z por NULL como seu filho.
     if (current->left == NULL && current->right == NULL) {
         if (parent == NULL) {
             bt->root = NULL;
@@ -103,6 +105,8 @@ void binary_tree_remove(BinaryTree *bt, void *key) {
         else {
             parent->right = NULL;
         }
+        key_val_pair_destroy(current->key_val_pair, bt->key_destroy_fn, bt->val_destroy_fn);
+        free(current);
     }
     else if (current->left == NULL) {
         if (parent == NULL) {
@@ -114,6 +118,8 @@ void binary_tree_remove(BinaryTree *bt, void *key) {
         else {
             parent->right = current->right;
         }
+        key_val_pair_destroy(current->key_val_pair, bt->key_destroy_fn, bt->val_destroy_fn);
+        free(current);
     }
     else if (current->right == NULL) {
         if (parent == NULL) {
@@ -125,6 +131,8 @@ void binary_tree_remove(BinaryTree *bt, void *key) {
         else {
             parent->right = current->left;
         }
+        key_val_pair_destroy(current->key_val_pair, bt->key_destroy_fn, bt->val_destroy_fn);
+        free(current);
     }
     else {
         Node *successor = current->right;
