@@ -56,7 +56,7 @@ void node_destroy(Node *node);
 /// @param key_destroy_fn Funcao de destruicao da chave
 /// @param val_destroy_fn Funcao de destruicao do valor
 /// @return BinaryTree*
-BinaryTree *binary_tree_construct( CmpFn cmp_fn, KeyDestroyFn key_destroy_fn, ValDestroyFn val_destroy_fn);
+BinaryTree *binary_tree_construct(CmpFn cmp_fn, KeyDestroyFn key_destroy_fn, ValDestroyFn val_destroy_fn);
 
 /// @brief  Adiciona um nó à árvore
 /// @param bt Arvore binaria
@@ -96,12 +96,12 @@ KeyValPair binary_tree_max(BinaryTree *bt);
 /// @brief  Remove e retorna o par chave-valor mínimo da árvore
 /// @param bt Arvore binaria
 /// @return KeyValPair Retorna o par chave-valor mínimo removido
-KeyValPair binary_tree_pop_min(BinaryTree *bt);
+KeyValPair* binary_tree_pop_min(BinaryTree *bt);
 
 /// @brief  Remove e retorna o par chave-valor máximo da árvore
 /// @param bt Arvore binaria
 /// @return KeyValPair Retorna o par chave-valor máximo removido
-KeyValPair binary_tree_pop_max(BinaryTree *bt);
+KeyValPair* binary_tree_pop_max(BinaryTree *bt);
 
 /// @brief  Retorna o valor associado à chave especificada
 /// @param bt Arvore binaria
