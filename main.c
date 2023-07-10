@@ -98,6 +98,16 @@ int main(void) {
         }
     }
 
+    Vector* inorder_traversal_iterative = binary_tree_inorder_traversal(bt);
+    while(vector_size(inorder_traversal_iterative) > 0) {
+        Node* current = vector_pop_front(inorder_traversal_iterative);
+        KeyValPair *kay_val_pair = current->key_val_pair;
+        Person* current_person = kay_val_pair->value;
+        person_print(current_person);
+    }
+
+    vector_destroy(inorder_traversal_iterative);
+
     binary_tree_destroy(bt);
     return 0;
 }

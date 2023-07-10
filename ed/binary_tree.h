@@ -4,6 +4,7 @@
 
 #include "person.h"
 #include "vector.h"
+#include "stack.h"
 
 typedef int (*CmpFn)(void *, void *);
 typedef void (*KeyDestroyFn)(void *);

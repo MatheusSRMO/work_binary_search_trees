@@ -235,3 +235,42 @@ void binary_tree_destroy(BinaryTree *bt) {
     node_destroy(bt->root, bt->key_destroy_fn, bt->val_destroy_fn);
     free(bt);
 }
+
+Vector *binary_tree_inorder_traversal(BinaryTree *bt) {
+    Vector* out_vec = vector_construct();
+
+    // Cria uma pilha
+    Stack* stack = stack_construct();
+
+    // Defina o no atual como a raiz
+    Node* current = bt->root;
+
+    // enquanto não terminar
+    while(1) {
+        // Enquanto o no atual não for nulo:
+        while(current != NULL) {
+            // Adicione o nó na pilha
+            stack_push(stack, current);
+            // Faça o nó ser o da esquerda
+            current = current->left;
+        }
+
+        // Se a pilha estiver vazia:
+        if(stack_empty(stack)) {
+            // Defina que o processo terminou
+            break;
+        }
+        // Caso contrário:
+        else {
+            // Remova um nó da pilha
+            Node* popped = stack_pop(stack);
+            // Adicione o nó na saída
+            vector_push_back(out_vec, popped);
+            // Faça o nó atual ser o da direita
+            current = popped->right;
+        }
+    }
+    stack_destroy(stack);
+
+    return out_vec;
+}
