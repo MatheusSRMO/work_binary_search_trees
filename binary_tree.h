@@ -96,12 +96,12 @@ KeyValPair binary_tree_max(BinaryTree *bt);
 /// @brief  Remove e retorna o par chave-valor mínimo da árvore
 /// @param bt Arvore binaria
 /// @return KeyValPair Retorna o par chave-valor mínimo removido
-KeyValPair* binary_tree_pop_min(BinaryTree *bt);
+KeyValPair binary_tree_pop_min(BinaryTree *bt);
 
 /// @brief  Remove e retorna o par chave-valor máximo da árvore
 /// @param bt Arvore binaria
 /// @return KeyValPair Retorna o par chave-valor máximo removido
-KeyValPair* binary_tree_pop_max(BinaryTree *bt);
+KeyValPair binary_tree_pop_max(BinaryTree *bt);
 
 /// @brief  Retorna o valor associado à chave especificada
 /// @param bt Arvore binaria

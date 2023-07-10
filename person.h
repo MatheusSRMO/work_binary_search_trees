@@ -13,6 +13,8 @@ typedef struct {
 
 Person *person_construct(char *name, int age, float height);
 
+int person_cmp(void* a, void* b);
+
 void person_print(Person *person);
 
 void person_destroy(void* person);

@@ -17,10 +17,15 @@ void int_destroy(void *key) {
     free(i);
 }
 
-int main(void) {
-    BinaryTree *bt = binary_tree_construct(int_cmp, int_destroy, person_destroy);
+void name_destroy(void *key) {
+    char* name = (char*)key;
+    if(name != NULL) free(name);
+}
 
-    int n, i, age, key;
+int main(void) {
+    BinaryTree *bt = binary_tree_construct(person_cmp, name_destroy, person_destroy);
+
+    int n, i, age;
     float height;
     char cmd[20], nome[20];
     scanf("%d", &n);
@@ -29,18 +34,20 @@ int main(void) {
         scanf("\n%s", cmd);
 
         if (!strcmp(cmd, "SET")) {
-            scanf("%d %s %d %f", &key, nome, &age, &height);
+            scanf("%s %d %f", nome, &age, &height);
 
             Person *person = person_construct(nome, age, height);
-            int *_key = malloc(sizeof(int));
-            *_key = key;
-            binary_tree_add(bt, _key, person);
+
+            char* name = malloc(strlen(nome) + 1);
+            strcpy(name, nome);
+
+            binary_tree_add(bt, name, person);
             
         }
         else if (!strcmp(cmd, "GET")) {
-            scanf("%d", &key);
+            scanf("%s", nome);
 
-            Person *person = binary_tree_get(bt, &key);
+            Person *person = binary_tree_get(bt, nome);
             if (person == NULL) {
                 printf("CHAVE INEXISTENTE \n");
             }
@@ -50,8 +57,32 @@ int main(void) {
         }
 
         else if (!strcmp(cmd, "POP")) {
-            scanf("%d", &key);
-            binary_tree_remove(bt, &key);
+            scanf("%s", nome);
+            binary_tree_remove(bt, nome);
+        }
+
+        else if (!strcmp(cmd, "MIN")) {
+            KeyValPair key_val_par_min = binary_tree_min(bt);
+            Person* person_min = key_val_par_min.value;
+            person_print(person_min);
+        }
+
+        else if (!strcmp(cmd, "MAX")) {
+            KeyValPair key_val_par_max = binary_tree_max(bt);
+            Person* person_max = key_val_par_max.value;
+            person_print(person_max);
+        }
+
+        else if (!strcmp(cmd, "POP_MIN")) {
+            KeyValPair key_val_par_popped_min = binary_tree_pop_min(bt);
+            Person* person_min = key_val_par_popped_min.value;
+            person_print(person_min);
+        }
+
+        else if (!strcmp(cmd, "POP_MAX")) {
+            KeyValPair key_val_par_popped_max = binary_tree_pop_max(bt);
+            Person* person_max = key_val_par_popped_max.value;
+            person_print(person_max);
         }
     }
 

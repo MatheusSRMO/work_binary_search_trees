@@ -168,14 +168,14 @@ KeyValPair binary_tree_max(BinaryTree *bt) {
     return *current->key_val_pair;
 }
 
-KeyValPair* binary_tree_pop_min(BinaryTree *bt) {
+KeyValPair binary_tree_pop_min(BinaryTree *bt) {
     Node *current = bt->root;
     Node *parent = NULL;
     while (current->left != NULL) {
         parent = current;
         current = current->left;
     }
-    KeyValPair *kvp = current->key_val_pair;
+    KeyValPair kvp = *current->key_val_pair;
     if (parent == NULL) {
         bt->root = current->right;
     }
@@ -186,14 +186,14 @@ KeyValPair* binary_tree_pop_min(BinaryTree *bt) {
     return kvp;
 }
 
-KeyValPair* binary_tree_pop_max(BinaryTree *bt) {
+KeyValPair binary_tree_pop_max(BinaryTree *bt) {
     Node *current = bt->root;
     Node *parent = NULL;
     while (current->right != NULL) {
         parent = current;
         current = current->right;
     }
-    KeyValPair *kvp = current->key_val_pair;
+    KeyValPair kvp = *current->key_val_pair;
     if (parent == NULL) {
         bt->root = current->left;
     }
