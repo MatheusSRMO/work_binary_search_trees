@@ -41,29 +41,33 @@ BinaryTree *binary_tree_construct(CmpFn cmp_fn, KeyDestroyFn key_destroy_fn, Val
     return binary_tree;
 }
 
-// Adiciona um par chave-valor na arvore
+// Adiciona um par chave-valor na arvore, se ja existir, substitui o valor
 void binary_tree_add(BinaryTree *bt, void *key, void *value) {
-    Node *node = node_construct(key, value, NULL, NULL);
-    if (bt->root == NULL) {
-        bt->root = node;
-        return;
-    }
     Node *current = bt->root;
-    while (1) {
+    Node *parent = NULL;
+    while (current != NULL) {
+        if (bt->cmp_fn(key, current->key_val_pair->key) == 0) {
+            key_val_pair_destroy(current->key_val_pair, bt->key_destroy_fn, bt->val_destroy_fn);
+            current->key_val_pair = key_val_pair_construct(key, value);
+            return;
+        }
+        parent = current;
         if (bt->cmp_fn(key, current->key_val_pair->key) < 0) {
-            if (current->left == NULL) {
-                current->left = node;
-                return;
-            }
             current = current->left;
         }
         else {
-            if (current->right == NULL) {
-                current->right = node;
-                return;
-            }
             current = current->right;
         }
+    }
+    Node *new_node = node_construct(key, value, NULL, NULL);
+    if (parent == NULL) {
+        bt->root = new_node;
+    }
+    else if (bt->cmp_fn(key, parent->key_val_pair->key) < 0) {
+        parent->left = new_node;
+    }
+    else {
+        parent->right = new_node;
     }
 }
 
