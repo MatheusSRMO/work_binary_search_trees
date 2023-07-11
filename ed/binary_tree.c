@@ -390,3 +390,37 @@ Vector *binary_tree_levelorder_traversal(BinaryTree *bt) {
 
     return out_vec;
 }
+
+static void inorder_recursive(Node* current, Vector* out_vec) {
+
+    /*
+    inorder(node)
+    begin
+        if node is null, return;
+        inorder(node.left);
+        print(tree.root);
+        inorder(node.right);
+    end
+    */
+
+    // Se o nó atual for nulo:
+    if(current == NULL) {
+        // Termine
+        return;
+    }
+    // Chame a função recursiva para o nó da esquerda
+    inorder_recursive(current->left, out_vec);
+    // Adicione o nó atual na saída
+    vector_push_back(out_vec, current);
+    // Chame a função recursiva para o nó da direita
+    inorder_recursive(current->right, out_vec);
+}
+
+Vector *binary_tree_inorder_traversal_recursive(BinaryTree *bt) {
+    Vector* out_vec = vector_construct();
+
+    // Chame a função recursiva
+    inorder_recursive(bt->root, out_vec);
+
+    return out_vec;
+}
