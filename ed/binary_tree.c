@@ -302,3 +302,52 @@ Vector *binary_tree_preorder_traversal(BinaryTree *bt) {
 
     return out_vec;
 }
+
+Vector *binary_tree_postorder_traversal(BinaryTree *bt) {
+    Vector* out_vec = vector_construct();
+
+    /*
+        Crie duas pilhas Q1 e Q2
+        Adicione a raiz em Q1
+        Enquanto Q1 não estiver vazia
+            Remova um nó de Q1
+            Adicione o esquerdo em Q1
+            Adicione o direito em Q1
+            Adicione o nó em Q2
+        Adicione os itens de Q2 na saída
+    */
+
+    // Cria duas pilhas Q1 e Q2
+    Stack* q1 = stack_construct();
+    Stack* q2 = stack_construct();
+
+    // Adicione a raiz em Q1
+    stack_push(q1, bt->root);
+
+    // Enquanto Q1 não estiver vazia
+    while(!stack_empty(q1)) {
+        // Remova um nó de Q1
+        Node* popped = stack_pop(q1);
+        // Adicione o esquerdo em Q1
+        if(popped->left != NULL) {
+            stack_push(q1, popped->left);
+        }
+        // Adicione o direito em Q1
+        if(popped->right != NULL) {
+            stack_push(q1, popped->right);
+        }
+        // Adicione o nó em Q2
+        stack_push(q2, popped);
+    }
+
+    // Adicione os itens de Q2 na saída
+    while(!stack_empty(q2)) {
+        Node* popped = stack_pop(q2);
+        vector_push_back(out_vec, popped);
+    }
+
+    stack_destroy(q1);
+    stack_destroy(q2);
+
+    return out_vec;
+}
