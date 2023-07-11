@@ -5,6 +5,7 @@
 #include "person.h"
 #include "vector.h"
 #include "stack.h"
+#include "circular_array.h"
 
 typedef int (*CmpFn)(void *, void *);
 typedef void (*KeyDestroyFn)(void *);

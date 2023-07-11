@@ -98,7 +98,7 @@ int main(void) {
         }
     }
 
-    Vector* inorder_traversal_iterative = binary_tree_postorder_traversal(bt);
+    Vector* inorder_traversal_iterative = binary_tree_levelorder_traversal(bt);
     
     while(vector_size(inorder_traversal_iterative) > 0) {
         Node* current = vector_pop_front(inorder_traversal_iterative);

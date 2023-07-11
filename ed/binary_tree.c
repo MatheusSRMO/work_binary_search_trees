@@ -351,3 +351,42 @@ Vector *binary_tree_postorder_traversal(BinaryTree *bt) {
 
     return out_vec;
 }
+
+Vector *binary_tree_levelorder_traversal(BinaryTree *bt) {
+    /*
+    crie uma fila
+    adicione a raiz na fila
+    enquanto a fila não estiver vazia:
+        remove um nó da fila
+        se o nó não for nulo:
+            adicione o nó na saída
+            adicione o esquerdo na fila
+            adicione o direito na fila
+    */
+    Vector* out_vec = vector_construct();
+
+    // Cria uma fila
+    CircularArray* queue = circular_array_construct(10, true);
+
+    // Adicione a raiz na fila
+    circular_array_push(queue, bt->root);
+
+    // enquanto a fila não estiver vazia:
+    while(!circular_array_is_empty(queue)) {
+        // remove um nó da fila
+        Node* popped = circular_array_pop(queue);
+        // se o nó não for nulo:
+        if(popped != NULL) {
+            // adicione o nó na saída
+            vector_push_back(out_vec, popped);
+            // adicione o esquerdo na fila
+            circular_array_push(queue, popped->left);
+            // adicione o direito na fila
+            circular_array_push(queue, popped->right);
+        }
+    }
+
+    circular_array_destruct(queue);
+
+    return out_vec;
+}
