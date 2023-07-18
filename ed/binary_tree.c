@@ -147,8 +147,11 @@ void binary_tree_remove(BinaryTree *bt, void *key) {
         else {
             successor_parent->right = successor->right;
         }
+        key_val_pair_destroy(current->key_val_pair, bt->key_destroy_fn, bt->val_destroy_fn);
+
         current->key_val_pair = successor->key_val_pair;
-        node_destroy(successor, bt->key_destroy_fn, bt->val_destroy_fn);
+
+        free(successor);
     }
 }
 
